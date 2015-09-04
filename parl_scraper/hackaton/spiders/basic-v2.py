@@ -70,7 +70,7 @@ class ConseilNationalSpider(CrawlSpider):
             item['name'] = name.split()[0].strip()
             item['name'] = item['name'].replace(",", "")
             item['role'] = ""
-            if len(name.split(",")) == 2:
+            if len(name.split(",")) == 3:
                 item['role'] = name.split(",")[-1].strip()
                 item['role'] = item['role'].replace(":", "")
             item['group'] = ""
@@ -90,5 +90,6 @@ class ConseilNationalSpider(CrawlSpider):
             # Text of intervention
             #item['data'] = " ".join(sel.xpath('descendant::*/text()').extract())#.encode("utf-8")
             item['data'] = clean_format(" ".join(sel.xpath('descendant-or-self::*/text()').extract()).encode("utf-8"))
+            item['data'] = "".join(item['data'].split(":")[1:]).strip()
             #item['data'] = sel.xpath('descendant-or-self::*/text()').extract()
             yield item
