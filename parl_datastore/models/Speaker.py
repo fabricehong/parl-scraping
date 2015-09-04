@@ -1,6 +1,6 @@
 __author__ = 'fabrice'
 
-class Person:
+class Speaker:
     name=None
     sex=None
     pageUrl=None
