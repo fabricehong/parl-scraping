@@ -3,7 +3,7 @@
 Parlement files scraper
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Control the Bactosense Flowcytometer.
+OpenData Hackathon.
 
 '''
 
@@ -13,9 +13,9 @@ setup(
     name='Swiss Parlement Scraper',
     description="Scrape and analyze transcriptions of swiss parlement sessions.",
     version='0.1dev',
-    author='OpenData.ch'
-    author_email=''
-    packages=['scraper', 'analyze', ],
+    author='OpenData.ch',
+    author_email='',
+    packages=['parl_scraper', 'parl_datastore', 'parl_service'],
     # package_data={
     #     '...': ['...', ],
     # },
