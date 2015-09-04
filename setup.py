@@ -1,6 +1,6 @@
 # -*- coding: UTF8 -*-
 '''
-Parlement files scraper
+Parliament files scraper
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 OpenData Hackathon.
@@ -10,12 +10,12 @@ OpenData Hackathon.
 from setuptools import setup
 
 setup(
-    name='Swiss Parlement Scraper',
-    description="Scrape and analyze transcriptions of swiss parlement sessions.",
+    name='Swiss Parliament Scraper',
+    description="Scrape and analyze transcriptions of swiss parliament sessions.",
     version='0.1dev',
     author='OpenData.ch',
     author_email='',
-    packages=['parl_scraper', 'parl_datastore', 'parl_service'],
+    packages=['parl_scraper', 'parl_datastore',],
     # package_data={
     #     '...': ['...', ],
     # },
@@ -33,6 +33,5 @@ setup(
     license='MIT',
     long_description=open('README.md').read(),
     install_requires=[
-        'sqlalchemy'
     ],
 )
