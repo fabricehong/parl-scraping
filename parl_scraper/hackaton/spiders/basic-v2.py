@@ -9,7 +9,7 @@ NB inbound URLs must be Subject url within a Séance.
 """
 __author__ = """Giovanni Colavizza"""
 
-import scrapy
+import scrapy, codecs, requests
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from hackaton.items import HackatonItem
@@ -17,9 +17,23 @@ from hackaton.text_cleaning import clean_format
 
 base_link = "http://www.parlament.ch"
 
+# getting urls to parse from txt file
+input_file = "debates-urls.txt"
+urls = codecs.open(input_file, "rb", "utf-8").read()
+start_urls = list()
+for line in urls.split("\n"):
+    line = line[1:-1]
+    url = base_link+"/"+line
+    #r = requests.get(url)
+    #if r.status_code == requests.codes.ok:
+    start_urls.append(url)
+    print(url)
+
 class ConseilNationalSpider(CrawlSpider):
     name = "CNbasic2"
     allowed_domains = ["parlament.ch"]
+    start_urls = start_urls
+    """
     start_urls = [
         "http://www.parlament.ch/ab/frameset/f/n/4918/463775/f_n_4918_463775_463870.htm",
         "http://www.parlament.ch/ab/frameset/f/n/4918/463775/f_n_4918_463775_463783.htm",
@@ -27,6 +41,7 @@ class ConseilNationalSpider(CrawlSpider):
         "http://www.parlament.ch/ab/frameset/f/n/4918/463775/f_n_4918_463775_463882.htm",
         "http://www.parlament.ch/ab/frameset/f/n/4918/463775/f_n_4918_463775_463906.htm"
     ]
+    """
 
     rules = [
         Rule(LinkExtractor(tags=('a', 'area', 'frame'), attrs=('href','src')), callback='parse')
