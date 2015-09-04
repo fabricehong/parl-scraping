@@ -23,3 +23,17 @@ Setup virtualenv:
 Install the packages and its dependencies:
 
   python setup.py install
+
+## Technology used
+
+### Web page scrapping
+
+Scrappy : scrapping of html pages
+
+### DB / search
+
+Elastic search
+
+### Visualization
+
+Kibana
