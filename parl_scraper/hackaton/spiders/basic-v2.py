@@ -18,8 +18,13 @@ from hackaton.text_cleaning import clean_format
 base_link = "http://www.parlament.ch"
 allowed_base = "/ab/frameset/f/n/"
 
+# FIX Presidents
+presidents = ["Le président", "La présidente", "Le vice-président", "La vice-présidente",
+              "Präsident", "Präsidentin", "Alterspräsident", "Alterspräsidentin"]
+
 # getting urls to parse from txt file
 input_file = "debates-urls.txt"
+#input_file = "missing.txt"
 urls = codecs.open(input_file, "rb", "utf-8").read()
 start_urls = list()
 for line in urls.split("\n"):
@@ -110,4 +115,12 @@ class ConseilNationalSpider(CrawlSpider):
             item['data'] = clean_format(" ".join(sel.xpath('descendant-or-self::*/text()').extract()).encode("utf-8"))
             item['data'] = "".join(item['data'].split(":")[1:]).strip()
             #item['data'] = sel.xpath('descendant-or-self::*/text()').extract()
+            # fix Presidents and Vice-presidents
+            if item['surname'].encode('utf-8') in presidents:
+                item['role'] = item['canton']
+                item['name'] = item['group'].split()[-1]
+                item['surname'] = " ".join(item['group'].split()[:-1])
+                item['canton'] = ""
+                item['group'] = ""
+            item['name'] = item['name'].replace("(","")
             yield item
