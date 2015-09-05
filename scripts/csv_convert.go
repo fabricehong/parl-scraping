@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -42,11 +43,11 @@ func main() {
 	row := make([]string, nFields)
 	for _, document := range documents {
 		for i, header := range headers {
-			field, err := json.Marshal(document[header])
-			if err != nil {
-				log.Fatal(err)
+			if document[header] == nil {
+				row[i] = ""
+			} else {
+				row[i] = fmt.Sprintf("%v", document[header])
 			}
-			row[i] = string(field)
 		}
 		w.Write(row)
 	}
