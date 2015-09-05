@@ -1,0 +1,241 @@
+a <- readLines("bio/1.txt")
+a <- iconv(a, "iso-8859-1", "UTF-8")
+xslt.bornes <- grep("xslt", a)
+b <- paste0(a[(xslt.bornes[1]+1):(xslt.bornes[2]-1)], collapse = "")
+c <- xmlTreeParse(b, isHTML = TRUE)
+rm(list=ls())#
+#
+library(XML)#
+#
+# a <- xmlTreeParse("bio/1.txt", isHTML = TRUE)#
+# a <- xmlParse("bio/1.txt", isHTML = TRUE)#
+# b <- xmlRoot(a)#
+# c <- xmlChildren(b)#
+#
+a <- readLines("bio/1.txt")#
+a <- iconv(a, "iso-8859-1", "UTF-8")#
+xslt.bornes <- grep("xslt", a)#
+b <- paste0(a[(xslt.bornes[1]+1):(xslt.bornes[2]-1)], collapse = "")#
+c <- xmlTreeParse(b, isHTML = TRUE)
+c
+rm(list=ls())#
+#
+library(XML)#
+#
+# a <- xmlTreeParse("bio/1.txt", isHTML = TRUE)#
+# a <- xmlParse("bio/1.txt", isHTML = TRUE)#
+# b <- xmlRoot(a)#
+# c <- xmlChildren(b)#
+#
+# Lire la page html#
+a <- readLines("bio/1.txt")#
+# a <- iconv(a, "iso-8859-1", "UTF-8")#
+#
+# Extraire la partie avec l'info, délimitée par xslt#
+xslt.bornes <- grep("xslt", a)#
+b <- paste0(a[(xslt.bornes[1]+1):(xslt.bornes[2]-1)], collapse = "")#
+#
+# Retransformer ça en XML#
+c <- xmlTreeParse(b, isHTML = TRUE)
+c
+d <- xmlRoot(c)
+d
+e <- xmlChildren(d)
+e
+xmlChildren(d1)
+xmlChildren(e)
+e <- xmlChildren(d)
+xmlChildren(e)
+?XMLNodeList
+??XMLNodeList
+e
+xmlToDataFrame(e)
+xmlToDataFrame(c)
+xmlToDataFrame(d)
+?xmlToDataFrame
+xmlToDataFrame(b)
+xmlToDataFrame(c)
+?xmlToDataFrame
+f = system.file("exampleData", "size.xml", package = "XML")#
+ xmlToDataFrame(f, c("integer", "integer", "numeric"))
+f
+getNodeSet(e, "//")
+getNodeSet(e, "/")
+class(e)
+class(d)
+?getNodeSet
+class(c)
+class(b)
+getNodeSet(d, "/")
+xmlName(d)
+xmlSize(d)
+xmlAttrs(d)
+d
+getNodeSet(d, "/")
+rm(list=ls())#
+#
+library(XML)
+a <- readLines("bio/1.txt")
+a
+xslt.bornes <- grep("xslt", a)
+xslt.bornes
+b <- paste0(a[(xslt.bornes[1]+1):(xslt.bornes[2]-1)], collapse = "")
+b
+c <- xmlTreeParse(b, isHTML = TRUE)
+c
+d <- xmlRoot(c)
+d
+e <- xmlChildren(d)
+e
+c
+i <- 1
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")
+destfile <- paste0("bio/", i, ".xml", collapse="")
+a <- download.file(url, destfile)
+a
+rm(list=ls())#
+#
+for (i in 1:3727) {#
+	url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")#
+	destfile <- paste0("bio/", i, ".xml", collapse="")#
+	a <- download.file(url, destfile)#
+}
+?download.file
+url.exists("http://ws.parlament.ch/councillors/3?format=xml")
+library(RCurl)
+url.exists("http://ws.parlament.ch/councillors/3?format=xml")
+url.exists("http://ws.parlament.ch/councillors/1?format=xml")
+??status
+library(httr)
+rm(list=ls())
+library(httr)
+i <- 1
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")
+destfile <- paste0("bio/", i, ".xml", collapse="")
+url
+http_status(url)
+?http_status
+GET(url)
+i <- 3
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")
+GET(url)
+
+i <- 1
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")
+(http_status(GET(url)))
+library(httr)
+http_status(GET(url))
+?http_status
+http_status(100)
+GET(url)
+str(GET(url))
+GET(url)$status_code
+class(GET(url)$status_code)
+for (i in 3728:4000) {#
+	url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")#
+	GET(url)$status_code == 200#
+}
+for (i in 3728:4000) {#
+	url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=xml", collapse="")#
+	cat(GET(url)$status_code == 200)#
+}
+b <- htmlTreeParse("bio_xml/1.xml")
+rm(list=ls())#
+#
+library(XML)
+b <- htmlTreeParse("bio_xml/1.xml")
+class(b)
+b
+?xmlToDataFrame
+class(a)
+rm(list=ls())#
+#
+library(XML)#
+#
+a <- htmlParse("bio_xml/1.xml")#
+class(a)#
+#
+b <- htmlTreeParse("bio_xml/1.xml")#
+class(b)#
+# a <- xmlTreeParse("bio/1.txt", isHTML = TRUE)#
+# a <- xmlParse("bio/1.txt", isHTML = TRUE)#
+# b <- xmlRoot(a)#
+# c <- xmlChildren(b)#
+#
+# Lire la page html#
+a <- readLines("bio/1.txt")#
+# a <- iconv(a, "iso-8859-1", "UTF-8")#
+#
+# Extraire la partie avec l'info, délimitée par xslt#
+xslt.bornes <- grep("xslt", a)#
+b <- paste0(a[(xslt.bornes[1]+1):(xslt.bornes[2]-1)], collapse = "")#
+#
+# Retransformer ça en XML#
+c <- xmlTreeParse(b, isHTML = TRUE)#
+#
+d <- xmlRoot(c)#
+e <- xmlChildren(d)#
+#
+getNodeSet(d, "/")#
+xmlName(d)#
+xmlSize(d)#
+xmlAttrs(d)
+rm(list=ls())#
+#
+library(XML)#
+#
+a <- htmlParse("bio_xml/1.xml")#
+class(a)#
+#
+b <- htmlTreeParse("bio_xml/1.xml")#
+class(b)#
+# # # a <- xmlTreeParse("bio/1.txt", isHTML = TRUE)#
+# # a <- xmlParse("bio/1.txt", isHTML = TRUE)#
+# # b <- xmlRoot(a)#
+# # c <- xmlChildren(b)#
+#
+# # Lire la page html#
+# a <- readLines("bio/1.txt")#
+# # a <- iconv(a, "iso-8859-1", "UTF-8")#
+#
+# # Extraire la partie avec l'info, délimitée par xslt#
+# xslt.bornes <- grep("xslt", a)#
+# b <- paste0(a[(xslt.bornes[1]+1):(xslt.bornes[2]-1)], collapse = "")#
+#
+# # Retransformer ça en XML#
+# c <- xmlTreeParse(b, isHTML = TRUE)#
+#
+# d <- xmlRoot(c)#
+# e <- xmlChildren(d)#
+#
+# getNodeSet(d, "/")#
+# xmlName(d)#
+# xmlSize(d)#
+# xmlAttrs(d)
+xmlRoot(a)
+xmlRoot(b)
+xmlChildren(b)
+xmlChildren(a)
+xmlRoot(a)
+root <- xmlRoot(a)
+child = xmlChildren(root)
+child
+rm(list=ls())#
+#
+library(httr)
+i <- 1
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=json", collapse="")
+url
+chrome
+GET(url)$status_code == 200
+destfile <- paste0("bio_json/", i, ".json", collapse="")
+a <- download.file(url, destfile)
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=json", collapse="")
+url <- paste0("http://ws.parlament.ch/councillors/", i, "?format=json", collapse="")#
+	if (GET(url)$status_code == 200) {#
+		destfile <- paste0("bio_json/", i, ".json", collapse="")#
+		a <- download.file(url, destfile)#
+	}
+url
+destfile
+download.file(url, destfile)
