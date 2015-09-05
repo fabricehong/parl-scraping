@@ -9,8 +9,8 @@ import (
 )
 
 func main() {
-	input := "../data/items-with-bio.json"
-	output := "../data/items-with-bio.csv"
+	input := os.Args[1]
+	output := os.Args[2]
 
 	outFile, err := os.Create(output)
 	if err != nil {
