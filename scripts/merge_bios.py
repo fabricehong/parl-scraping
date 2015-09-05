@@ -1,9 +1,14 @@
 #!/usr/bin/python2.7
 
 import json
+import sys
 
-main_data_filename = "json_fixtures/items-full-2.json"
-merged_filename = "json_fixtures/items-with-bio.json"
+# main_data_filename = "json_fixtures/items-full-2.json"
+# merged_filename = "json_fixtures/items-with-bio.json"
+main_data_filename = sys.argv[1]
+merged_filename = sys.argv[2]
+
+bio_json_dir = "biography_retrieval/bio_json"
 
 # Import main dataset
 with open(main_data_filename, "r") as file:
@@ -28,7 +33,7 @@ bio_subkeys = { 'domicile': [ 'city', 'zip' ] }
 for i, e in enumerate(interv[:3]):
 	# Load biography for intervention 'i' from JSON file
 	bio_id = interv[i]['bio'].split('=',1)[1]
-	bio_filename = "../biography_retrieval/bio_json/" + bio_id + ".json"
+	bio_filename = bio_json_dir + "/" + bio_id + ".json"
 	with open(bio_filename, "r") as file:
 		bio = json.loads(file.read())
 
