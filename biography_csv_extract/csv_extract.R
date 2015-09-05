@@ -1,6 +1,6 @@
 rm(list=ls())
 
-# working directory is "parl_scraping"
+# working directory is "parl_scraping/biography_csv_extract"
 
 library(jsonlite)
 wd <- getwd()
