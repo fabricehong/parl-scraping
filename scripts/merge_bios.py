@@ -34,7 +34,7 @@ bio_keys = [
 bio_subkeys = { 'domicile': [ 'city', 'zip' ] }
 
 # Merge biographic data into main dataset
-for i, e in enumerate(interv[:3]):
+for i, e in enumerate(interv):
 	# Load biography for intervention 'i' from JSON file
 	bio_id = interv[i]['bio'].split('=',1)[1]
 	bio_filename = bio_json_dir + "/" + bio_id + ".json"
