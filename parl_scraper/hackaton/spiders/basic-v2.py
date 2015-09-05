@@ -16,6 +16,7 @@ from hackaton.items import HackatonItem
 from hackaton.text_cleaning import clean_format
 
 base_link = "http://www.parlament.ch"
+allowed_base = "/ab/frameset/f/n/"
 
 # getting urls to parse from txt file
 input_file = "debates-urls.txt"
@@ -23,6 +24,8 @@ urls = codecs.open(input_file, "rb", "utf-8").read()
 start_urls = list()
 for line in urls.split("\n"):
     line = line[1:-1]
+    if allowed_base not in line:
+        continue
     url = base_link+"/"+line
     #r = requests.get(url)
     #if r.status_code == requests.codes.ok:
