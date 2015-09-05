@@ -2,3 +2,10 @@
 env/
 .idea/
 *.egg-info/
+*.DS_Store
+*.RData
+*.Rapp.history
+*.Rhistory
+build/
+dist/
+esdata/
