@@ -13,11 +13,13 @@ Now play around with search terms, visualizations, and dashboards. Try searching
 
 Then make a visualization: go to Visualizations -> Pie Chart -> From New Search -> Split Slices; 
 then Aggregate by Terms, and select your preferred Field.
+
 ![Raclette by Person](darbelley.png "Who talks about Raclette?")
 
 Once you have saved visualizations, you can add them to dashboards. Have a look at this one:
 
-<iframe src="http://parlement.letemps.ch/#/dashboard/Fromages?embed&_a=(filters:!(),panels:!((col:1,id:'Raclette:-o%C3%B9-questionmark-',row:1,size_x:4,size_y:3,type:visualization),(col:1,id:'Raclette:-qui-questionmark-',row:4,size_x:4,size_y:3,type:visualization),(col:5,id:'Fondue:-o%C3%B9-questionmark-',row:4,size_x:4,size_y:3,type:visualization),(col:5,id:'Fondue:-qui-questionmark-',row:1,size_x:4,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:Fromages)&_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-25y,mode:relative,to:now))" height="600" width="800"></iframe>
+![Who talks about cheese?](fromages.png "Who talks about cheese?")
+
 
 ## Context
 
