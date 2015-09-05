@@ -24,6 +24,10 @@ A [wiki](http://make.opendata.ch/wiki/project:chparlscraping) is available for t
 
 ### Fetching data from parlament website
 
+Source: minutes of National Council from http://www.parlament.ch/ab/frameset/f/index.htm
+
+Parsed URL list from ./debates-urls.txt
+
 Install Scrapy: http://doc.scrapy.org/en/latest/intro/install.html
 
 Project name: "hackaton"
