@@ -1,13 +1,17 @@
 #!/usr/bin/python2.7
 
-import json
-import sys
+import json, sys, unicodedata, os
 
-# main_data_filename = "json_fixtures/items-full-2.json"
-# merged_filename = "json_fixtures/items-with-bio.json"
+# Input file
 main_data_filename = sys.argv[1]
-merged_filename = sys.argv[2]
 
+# Output file (single file output) or directory (output split by session)
+output = sys.argv[2]
+
+# Whether to generate one output file per session
+split_by_session = os.path.isdir(output)
+
+# Directory containing the JSON biorgraphy of each parliament member
 bio_json_dir = "biography_retrieval/bio_json"
 
 # Import main dataset
@@ -46,6 +50,18 @@ for i, e in enumerate(interv[:3]):
 		for subkey in bio_subkeys[key]:
 			interv[i][subkey] = bio[key][subkey] if key in bio and subkey in bio[key] else ''
 
-# Write result to output file
-with open(merged_filename, "w") as file:
-	file.write(json.dumps(interv))
+if split_by_session:
+	# Group entries by session name (simplified, pure ASCII name to be used for filename)
+	entries = {}
+	for e in interv:
+		session = e['session_title'].split(" - ")[1].encode('ascii', 'ignore').translate(None, "'()").replace(' ', '_') 
+		entries.setdefault(session, []).append(e)
+
+	# Output one file per session
+	for session in entries.keys():
+		with open(output + "/" + session + ".json", "w") as file:
+			file.write(json.dumps(entries[session]))
+else:
+	# Write result to output file
+	with open(output, "w") as file:
+		file.write(json.dumps(interv))
