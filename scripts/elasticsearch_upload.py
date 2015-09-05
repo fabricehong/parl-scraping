@@ -30,7 +30,7 @@ if __name__ == '__main__':
     document_count = 0
     json_files = os.listdir(data_dir)
     for i, json_file in enumerate(json_files):
-        with open(json_file, 'r') as fo:
+        with open(os.path.join(data_dir, json_file), 'r') as fo:
             documents = json.load(fo)
 
         for j, document in enumerate(documents):
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             document['date'] = d.isoformat()
             resp = requests.put(url + '/' + str(document_count), json=document)
             if j % 100 == 0:
-                print("file {}/{}, entry {}/{}".format(i, len(json_files), j, len(documents)))
+                print("file {}/{}, entry {}/{}".format(i + 1, len(json_files), j, len(documents)))
             if resp.status_code not in (200, 201):
                 print("{} ERROR: {}".format(resp.status_code, resp.reason))
                 sys.exit(1)
