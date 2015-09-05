@@ -13,7 +13,7 @@ A [wiki](http://make.opendata.ch/wiki/project:chparlscraping) is available for t
 
 [API doc](http://www.parlament.ch/e/dokumentation/webservices-opendata/Documents/webservices-info-dritte-e.pdf)
 
-## Overview of the architecture
+## Setup
 
 - Meeting minutes are scrapped from confederation website using python scripts in the project parl_scraper
 - We use elasticsearch to expose a text query interface on top of the json's
@@ -35,10 +35,14 @@ Install the packages and its dependencies:
 
     python setup.py install
     python setup.py develop
+    
+## Overview of the architecture
 
-## Running application / visualization
+- Meeting minutes are scrapped from confederation website using python scripts in the project parl_scraper
+- We use elasticsearch to expose a text query interface on top of the json's
+- We use Kibana on top of elastic search to do visualization of the text searches
 
-### Running docker elasticsearch / kibana containers:
+## Running docker elasticsearch/kinaba containers:
 
 start :
 
@@ -53,3 +57,10 @@ connect in ssh to container :
 
     ./conn [es | kib]
 
+## Docker:
+
+The commands that actually worked for us on DigitalOcean:
+
+    docker run -p 3333:9200 -p 3334:9300 -d --name=elasticsearch elasticsearch
+    docker run --link elasticsearch:elasticsearch -p 3335:5601 -d kibana
+    

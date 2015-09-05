@@ -5,7 +5,6 @@ Convert JSON to CSV
 ~~~~~~~~~~~~~~~~~~~
 """
 import sys
-import codecs
 
 usage = """
 csv_convert.py data.json data.csv
@@ -20,7 +19,7 @@ import requests
 if __name__ == '__main__':
 
     if len(sys.argv) < 3:
-        print usage
+        print(usage)
         sys.exit(1)
 
     data, outfile = sys.argv[1:]

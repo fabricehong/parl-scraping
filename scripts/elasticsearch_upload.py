@@ -15,11 +15,12 @@ where i is the index of the item in the array.
 
 import json
 import requests
+import datetime
 
 if __name__ == '__main__':
 
     if len(sys.argv) < 3:
-        print usage
+        print(usage)
         sys.exit(1)
 
     data, url = sys.argv[1:]
@@ -28,8 +29,11 @@ if __name__ == '__main__':
         documents = json.load(fo)
 
     for i, document in enumerate(documents):
+        # translate date
+        d = datetime.datetime.strptime(document['date'], '%d.%m.%y')
+        document['date'] = d.isoformat()
         resp = requests.put(url + '/' + str(i), json=document)
         if resp.status_code not in (200, 201):
-            print "{} ERROR: {}".format(resp.status_code, resp.reason)
+            print("{} ERROR: {}".format(resp.status_code, resp.reason))
             sys.exit(1)
 
