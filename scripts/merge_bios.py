@@ -36,7 +36,16 @@ bio_subkeys = { 'domicile': [ 'city', 'zip' ] }
 # Merge biographic data into main dataset
 for i, e in enumerate(interv):
 	# Load biography for intervention 'i' from JSON file
-	bio_id = interv[i]['bio'].split('=',1)[1]
+	bio_items = e['bio'].split('=',1)
+	if len(bio_items) < 2:
+		print "Could not get biographic data for", e['name'], e['surname']
+		continue
+
+	bio_id = bio_items[1].strip()
+	if len(bio_id) == 0:
+		print "Corrupt biographic URL in entry:", e
+		continue
+
 	bio_filename = bio_json_dir + "/" + bio_id + ".json"
 	with open(bio_filename, "r") as file:
 		bio = json.loads(file.read())
