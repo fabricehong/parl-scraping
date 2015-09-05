@@ -1,5 +1,7 @@
 rm(list=ls())
 
+# working directory is "parl_scraping"
+
 library(jsonlite)
 wd <- getwd()
 setwd("../biography_retrieval/bio_json/")

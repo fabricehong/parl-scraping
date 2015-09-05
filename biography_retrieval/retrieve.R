@@ -1,5 +1,7 @@
 rm(list=ls())
 
+# Working directory is "parl_scraping/biography_retrieval"
+
 library(httr)
 
 # Querying the parlament web services
