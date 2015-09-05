@@ -17,12 +17,23 @@ A [wiki](http://make.opendata.ch/wiki/project:chparlscraping) is available for t
 
 Setup virtualenv:
 
-  virtualenv env
-  source env/bin/activate
+    virtualenv env
+    source env/bin/activate
 
 Install the packages and its dependencies:
 
-  python setup.py install
+    python setup.py install
+    python setup.py develop
+    
+## Docker setup:
+
+Create and run an Elasticsearch instance:
+
+    docker run -P -d -v "$PWD/esdata":/usr/share/elasticsearch/data --name=elasticsearch elasticsearch 
+
+Create and run Kibana instance:
+
+    docker run -P --name=kibana --link elasticsearch:elasticsearch -d kibana
 
 ## Technology used
 
