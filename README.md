@@ -29,7 +29,7 @@ Install the packages and its dependencies:
 
 Create and run an Elasticsearch instance:
 
-    docker run -P -d -v "$PWD/esdata":/usr/share/elasticsearch/data --name=elasticsearch elasticsearch 
+    docker run -P -d --name=elasticsearch elasticsearch 
 
 Create and run Kibana instance:
 
