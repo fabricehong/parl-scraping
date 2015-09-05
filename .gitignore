@@ -6,3 +6,5 @@ env/
 *.RData
 *.Rapp.history
 *.Rhistory
+build/
+dist/
