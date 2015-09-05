@@ -38,7 +38,7 @@ Install the packages and its dependencies:
 
 ## Running application / visualization
 
-### Running docker elasticsearch/kinaba containers:
+### Running docker elasticsearch / kibana containers:
 
 start :
 
