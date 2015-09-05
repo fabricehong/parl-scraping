@@ -54,9 +54,16 @@ it could be better done upstream.
 
 ### Fetching data from parlament website
 
+#### Fetching the list of URLs for the minutes full text
+
 Source: minutes of National Council from http://www.parlament.ch/ab/frameset/f/index.htm
 
-Parsed URL list from ./debates-urls.txt
+The script `parl_scraper/get-debates-urls.sh` fetches the table-of-content HTML files for
+all minutes, parses the files to extract the fulltext URLs and writes the result to
+`parl_scraper/debates-urls.txt`. By default the script's downloading part is commented-out,
+you can use the pre-downloaded files in `parl_scraper/tables-of-content.tar.xz` instead.
+
+#### Scraping the fulltext HTML pages
 
 Install Scrapy: http://doc.scrapy.org/en/latest/intro/install.html
 
@@ -64,12 +71,42 @@ Project name: "hackaton"
 
 Move to /hackaton
 
-Run:
+In the `parl_scraper` directory, run:
 
-    scrapy crawl CNbasic2 -o json_fixtures/items-full-final.json
-    scrapy crawl CNbasic2 -o json_fixtures/items-full-final.csv
+    scrapy crawl CNbasic2 -o ../data/items-full-final.json
+    scrapy crawl CNbasic2 -o ../data/items-full-final.csv
 
-To export in json or csv respectively. Use ...
+#### Fetching the biographic data for each member of parliament
+
+The script `biography_retrieval/retrieve.R` downloads all the biographic data
+into the `bio_json` and `bio_xml` subdirectories.
+
+#### Merging the fulltext and biographic data
+
+The `scripts/merge_bios.py` script can be used to generate either one JSON file with the merged
+data, or one JSON file per legislative session.
+
+For the first case, give it the input and output files:
+
+    scripts/merge_bios.py data/items-full-final.json data/items-full-final-with-bio.json
+
+For the second case, give it an existing directory as second argument:
+
+    scripts/merge_bios.py data/items-full-final.json data/with-bio-split-json 
+
+#### Converting the JSON files to CSV
+
+The program `scripts/csv_convert.go` can be used to convert a JSON file to CSV. To build, run
+`go build csv_convert.go` in the `scripts` directory.
+
+To run, give it the input and output file names:
+
+    scripts/csv_convert data/items-full-final-with-bio.json data/items-full-final-with-bio.csv
+
+To convert all JSON files from `data/with-bio-split-json` into CSV files in the (pre-existing)
+directory `data/with-bio-split-csv`, you can run the following shell command:
+
+    for i in data/with-bio-split-json/*.json; do scripts/csv_convert "$i" "${i//json/csv}"; done
 
 #### Python development
 
@@ -114,7 +151,7 @@ The commands that actually worked for us on DigitalOcean:
     
 ## Data format:
 
-The `/data` folder contains two representations of the intervention transcripts. The first is a JSON file. 
+The `data` folder contains two representations of the intervention transcripts. The first is a JSON file. 
 It contains an array of objects, of which each object contains the following keys:
 
     Link_subject: link to the page of the subject under discussion
@@ -131,21 +168,24 @@ It contains an array of objects, of which each object contains the following key
     
 The second representation is a CSV file with the same data, where each object described above occupies one line.
 
+These data are available in the archives `data/items-full-final-with-bio.json.zip` and
+`data/items-full-final-with-bio.csv.zip` respectively.
+
+The same datasets split by legislative session are available in the archives `data/with-bio-split-json.zip`
+and `with-bio-split-csv.zip`.
 
 ### Import into elasticsearch
 
 To import the data into elasticsearch, unzip the JSON data and move all JSON files to a new folder:
 
     cd data
-    mkdir json
-    unzip json-merged.json
-    mv *.json json/
+    unzip with-bio-split-json.zip
     cd ..
     
 Then use the upload script to upload to the elasticsearch server. Assuming the server is running on localhost on port 
 3333, the following command uploads all the entries in all the json files to elasticsearch:
 
-    python scripts/elasticsearch_upload.py data/json http://localhost:3333/parlament/intervention
+    python scripts/elasticsearch_upload.py data/with-bio-split-json http://localhost:3333/parlament/intervention
     
 This creates the entries under the `parlament` index.
 
