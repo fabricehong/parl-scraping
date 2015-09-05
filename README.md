@@ -5,6 +5,14 @@ This is a [Opendata.ch Elections Hackdays](http://make.opendata.ch/elections) pr
 This hackathon is happening Sep. 4-5 2015 in Lausanne (Le Temps newsroom) and Zurich (NZZ newsroom).  
 A [wiki](http://make.opendata.ch/wiki/project:chparlscraping) is available for this project.  
 
+## Where to go next
+
+Do you want to take over this project? Here's what needs to be done first:
+
+- Clean up the date fields. For now, the elasticsearch_upload.py script converts to dates to ISO format, 
+it could be better done upstream.
+- Configure elasticsearch to extract significant terms from the transcriptions, or run NLP TF/IDF
+
 ## Sources
 
 [Minutes of the parliament](http://www.parlament.ch/ab/frameset/f/index.htm)
@@ -104,13 +112,39 @@ The second representation is a CSV file with the same data, where each object de
 
 ### Import into elasticsearch
 
-To import the data into elasticsearch, unzip the JSON data:
+To import the data into elasticsearch, unzip the JSON data and move all JSON files to a new folder:
 
-    unzip data/items-with-bio.csv
+    cd data
+    mkdir json
+    unzip json-merged.json
+    mv *.json json/
+    cd ..
     
 Then use the upload script to upload to the elasticsearch server. Assuming the server is running on localhost on port 
-3333:
+3333, the following command uploads all the entries in all the json files to elasticsearch:
 
-    python scripts/elasticsearch_upload.py data/items-with-bio.json http://localhost:3333/parlament/intervention
+    python scripts/elasticsearch_upload.py data/json http://localhost:3333/parlament/intervention
     
 This creates the entries under the `parlament` index.
+
+### Kibana
+
+Once the data is uploaded into elasticsearch, go to Kibana (at localhost:3335 if you followed the instructions above), 
+then create a default index:
+
+![Index config](index_config.png "Index Configuration")
+
+Now the data is searchable. **In order to see anything**, you must select a wide date range though. 
+Head over to the "Explore" tag, then select posts for the past 25 years:
+
+![Time range](time_range.png "Time range config")
+
+Now play around with search terms, visualizations, and dashboards. Try searching for Raclette for example:
+
+![Raclette](raclette.png "When was raclette mentionned?")
+
+Then make a visualization: go to Visualizations -> Pie Chart -> From New Search -> Split Slices; 
+then Aggregate by Terms, and select your preferred Field.
+![Raclette by Person](darbelley.png "Who talks about Raclette?")
+
+
