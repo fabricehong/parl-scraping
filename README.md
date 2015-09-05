@@ -64,3 +64,36 @@ The commands that actually worked for us on DigitalOcean:
     docker run -p 3333:9200 -p 3334:9300 -d --name=elasticsearch elasticsearch
     docker run --link elasticsearch:elasticsearch -p 3335:5601 -d kibana
     
+    
+## Data format:
+
+The `/data` folder contains two representations of the intervention transcripts. The first is a JSON file. 
+It contains an array of objects, of which each object contains the following keys:
+
+    Link_subject: link to the page of the subject under discussion
+    Surname: of the person speaking
+    Description: of the subject under discussion
+    Bio: link to the page of the person speaking
+    Canton: of provenance
+    Subject_id: of the subject under discussion
+    Date: of the intervention (DD.MM.YY)
+    Group: political group of the person speaking at the moment of the intervention
+    Session_title: title of the session (Séance)
+    Data: transcript of the intervention
+    Name: of the person speaking
+    
+The second representation is a CSV file with the same data, where each object described above occupies one line.
+
+
+### Import into elasticsearch
+
+To import the data into elasticsearch, unzip the JSON data:
+
+    unzip data/items-with-bio.csv
+    
+Then use the upload script to upload to the elasticsearch server. Assuming the server is running on localhost on port 
+3333:
+
+    python scripts/elasticsearch_upload.py data/items-with-bio.json http://localhost:3333/parlament/intervention
+    
+This creates the entries under the `parlament` index.

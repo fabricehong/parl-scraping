@@ -33,6 +33,8 @@ if __name__ == '__main__':
         d = datetime.datetime.strptime(document['date'], '%d.%m.%y')
         document['date'] = d.isoformat()
         resp = requests.put(url + '/' + str(i), json=document)
+        if i % 100 == 0:
+            print("{}/{}".format(i, len(documents)))
         if resp.status_code not in (200, 201):
             print("{} ERROR: {}".format(resp.status_code, resp.reason))
             sys.exit(1)
