@@ -25,26 +25,19 @@ Install the packages and its dependencies:
     python setup.py install
     python setup.py develop
     
-## Docker setup:
+## Overview of the architecture
 
-Create and run an Elasticsearch instance:
+- Meeting minutes are scrapped from confederation website using python scripts in the project parl_scraper
+- We use elasticsearch to expose a text query interface on top of the json's
+- We use Kibana on top of elastic search to do visualization of the text searches
 
-    docker run -P -d --name=elasticsearch elasticsearch 
+## Running docker elasticsearch/kinaba containers:
 
-Create and run Kibana instance:
+start :
 
-    docker run -P --name=kibana --link elasticsearch:elasticsearch -d kibana
+    ./start_env.sh
 
-## Technology used
+stop :
 
-### Web page scrapping
+    ./stop_env.sh
 
-Scrappy : scrapping of html pages
-
-### DB / search
-
-Elastic search
-
-### Visualization
-
-Kibana
