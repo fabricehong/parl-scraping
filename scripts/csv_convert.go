@@ -9,16 +9,16 @@ import (
 )
 
 func main() {
-	input := "../parl_scraper/items-full-with-bio.json"
-	output := "../parl_scraper/items-full-with-bio.json"
+	input := "../data/items-with-bio.json"
+	output := "../data/items-with-bio.csv"
 
-	outFile, err := os.Create("items.csv")
+	outFile, err := os.Create(output)
 	if err != nil {
 		log.Fatal(err)
 	}
 	w := csv.NewWriter(outFile)
 
-	data, err := ioutil.ReadFile("items.json")
+	data, err := ioutil.ReadFile(input)
 	if err != nil {
 		log.Fatal(err)
 	}
