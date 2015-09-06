@@ -9,3 +9,4 @@ env/
 build/
 dist/
 esdata/
+.directory
