@@ -37,7 +37,7 @@ if __name__ == '__main__':
             document_count += 1
             # translate date
             d = datetime.datetime.strptime(document['date'], '%d.%m.%y')
-            document['date'] = d.isoformat()
+            document['date'] = d.date().isoformat()
             resp = requests.put(url + '/' + str(document_count), json=document)
             if j % 100 == 0:
                 print("file {}/{}, entry {}/{}".format(i + 1, len(json_files), j, len(documents)))
