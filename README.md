@@ -49,7 +49,7 @@ This is a [Opendata.ch Elections Hackdays](http://make.opendata.ch/elections) pr
 Do you want to take over this project? Here's what needs to be done first:
 - Clean up the date fields. For now, the elasticsearch_upload.py script converts to dates to ISO format,
 - it could be better done upstream.
-- Configure elasticsearch to extract significant terms from the transcriptions, or run NLP TF/IDF
+- Configure elasticsearch to extract significant terms from the transcriptions.
 
 ## Sources
 [Minutes of the parliament](http://www.parlament.ch/ab/frameset/f/index.htm)
