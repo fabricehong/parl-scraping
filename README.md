@@ -16,7 +16,6 @@ Once you have saved visualizations, you can add them to dashboards. Have a look 
 
 ![Who talks about cheese?](fromages.png "Who talks about cheese?")
 
-## Contents
 
 <!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
@@ -27,21 +26,20 @@ Once you have saved visualizations, you can add them to dashboards. Have a look 
   - [Setup](#setup)
   - [How to](#how-to)
     - [Fetching data from parlament website](#fetching-data-from-parlament-website)
-    -   <!-- - [Fetching the list of URLs for the minutes full text](#fetching-the-list-of-urls-for-the-minutes-full-text) -->
-
+      - [Fetching the list of URLs for the minutes full text](#fetching-the-list-of-urls-for-the-minutes-full-text)
       - [Scraping the fulltext HTML pages](#scraping-the-fulltext-html-pages)
       - [Fetching the biographic data for each member of parliament](#fetching-the-biographic-data-for-each-member-of-parliament)
       - [Merging the fulltext and biographic data](#merging-the-fulltext-and-biographic-data)
       - [Converting the JSON files to CSV](#converting-the-json-files-to-csv)
       - [Python development](#python-development)
-
   - [Overview of the architecture](#overview-of-the-architecture)
   - [Running docker elasticsearch/kinaba containers:](#running-docker-elasticsearchkinaba-containers)
   - [Docker:](#docker)
   - [Data format:](#data-format)
     - [Import into elasticsearch](#import-into-elasticsearch)
     - [Kibana](#kibana)
-    - <!-- /TOC -->
+
+<!-- /TOC -->
 
 
 ## Context
