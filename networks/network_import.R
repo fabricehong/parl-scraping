@@ -28,16 +28,29 @@ E(g)$weight <- 1
 g <- simplify(g)
 E(g)$weight
 
+
+
+# ranks of edges/dialogues
 table(E(g)$weight)
 
-# plot(degree(g, mode = "in"), degree(g, mode = "out"))
 
-V(g)$color <- "white"
-V(g)$label <- NA
+# regexpr(V(g)$id)
+
+
+
+# plotting
+g$layout <- layout_with_kk(g)
+
+V(g)$color <- rainbow(length(levels(factor(V(g)$polgroup))))[factor(V(g)$polgroup)]
+V(g)$label <- paste(V(g)$surname, V(g)$name, sep=" ")
 V(g)$size <- 2
-E(g)$width <- E(g)$weight
 
-pdf("network_dialogues.pdf")
+E(g)$color <- "gray"
+E(g)[which(E(g)$weight == 1)]$color <- NA
+E(g)$width <- sqrt(E(g)$weight)
+E(g)$arrow.size <- .1
+
+pdf("network_dialogues.pdf", width = 50, height = 50)
 par(mar=c(0,0,0,0))
 plot(g)
 dev.off()
