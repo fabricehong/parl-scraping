@@ -51,6 +51,7 @@ func main() {
 		}
 		w.Write(row)
 	}
+	w.Flush()
 
 	log.Println("Number of documents", len(documents))
 }
