@@ -1,10 +1,10 @@
 rm(list=ls())
 
-# working directory is "parl_scraping/biography_csv_extract"
+# working directory is "parl_scraping/biography_retrieval/biography_csv_extract"
 
 library(jsonlite)
 wd <- getwd()
-setwd("../biography_retrieval/bio_json/")
+setwd("../bio_json/")
 
 lf <- list.files()
 
