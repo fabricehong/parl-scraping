@@ -3,7 +3,7 @@ rm(list=ls())
 library(lubridate)
 library(igraph)
 
-# working directory is "parl_scraping/networks"
+# working directory is "parl_scraping/parl_networks"
 
 arcs <- read.csv("graph-full/graph.csv", sep="&", header = FALSE, stringsAsFactors = FALSE)
 colnames(arcs) <- c("source", "target", "object", "date")
