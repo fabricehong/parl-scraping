@@ -28,6 +28,8 @@ for (i in 1:length(lf)) {
 	}
 }
 
+setwd(wd)
+
 date.extract <- function(a) {
 	ymd(unlist(regmatches(a, gregexpr("^[0-9\\-]+", a))))
 }
@@ -39,9 +41,9 @@ df$leaving <- date.extract(df$leaving)
 
 df$difference <- df$leaving - df$entry
 
-days.in.total <- aggregate(difference ~ id, data = df, sum)
+days_in_total <- aggregate(difference ~ id, data = df, sum)
 
-days.in.total[order(days.in.total$difference),]
+days_in_total[order(days_in_total$difference),]
 
 # Le plus longtemps (48 ans)
 df[df$id == "2322",]
@@ -54,4 +56,14 @@ df[df$id == "2845",]
 
 df[df$id == "2895",]
 
-setwd(wd)
+# D'après question de @munsterma sur Twitter : combien de temps les gens restent en fonction de leur âge ?
+age_at_entry <- aggregate(entry - birthday ~ id, data = df, min)
+age_duree <- merge(age_at_entry, days_in_total)
+colnames(age_duree) <- c("id", "age", "difference")
+age_duree$age <- as.numeric(age_duree$age)/365
+age_duree$difference <- as.numeric(age_duree$difference)/365
+
+g <- ggplot(age_duree, aes(x=difference,y=age)) + geom_point(size = 1) + ylab("Âge au moment de l'élection") + xlab("Durée du mandat") + ggtitle("Conseil national et Conseil des États")
+png("age_vs_duree.png", width = 960, height = 480)
+g
+dev.off()
