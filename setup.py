@@ -15,7 +15,7 @@ setup(
     version='0.1dev',
     author='OpenData.ch',
     author_email='',
-    packages=['parl_scraper', 'parl_datastore',],
+    packages=['parl_scraper',],
     # package_data={
     #     '...': ['...', ],
     # },
